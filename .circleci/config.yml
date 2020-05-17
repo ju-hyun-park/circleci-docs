@@ -48,6 +48,7 @@ commands:
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
+  version: 2
 
   build-deploy:
     jobs:
@@ -135,16 +136,24 @@ jobs:
 
 
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
-    docker:
-      - image: asciidoctor/docker-asciidoctor
+    executor:
+      name: ruby/default # we use the same ruby orb + tag across multiple jobs
+      tag: '2.6.3-node-browsers'
     steps:
       - *attach_workspace
       - checkout
+      - install-shared-assets
+      - ruby-deps # a `command` that is defined above
+      - run:
+          name: "Create landing folder for PDF output"
+          command: mkdir -p /tmp/workspace/pdfs
       - run:
           name: Build PDFs for Server
-          command: ./scripts/build_pdfs_local.sh
-      - store_artifacts: 
-          path: release/tmp/
+          command: ./scripts/build_pdfs.sh
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - pdfs
 
   build_config_builder: # this job runs the src-config-builder build process and moves the output into jekyll.
     executor:
