@@ -14,7 +14,7 @@ This document provides an overview of using GitHub, GitHub Enterprise, or Bitbuc
 ## Overview
 {:.no_toc}
 
-To use CircleCI you need to be using either GitHub and Bitbucket for your VCS. When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
+To use CircleCI you need to be using either GitHub or Bitbucket for your VCS. When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket Cloud.
 - A **service hook (or "push hook")** that is used to notify CircleCI when you push to GitHub or Bitbucket Cloud.
 
@@ -245,7 +245,7 @@ then copy and paste the key you created in step 1.
 Check "Allow write access",
 then click "Add key".
 
-3. Go to [https://circleci.com/gh/you/test-repo/edit#ssh](https://circleci.com/gh/you/test-repo/edit#ssh){:rel="nofollow"},
+3. Go to [https://app.circleci.com/settings/project/github/you/test-repo/ssh](https://app.circleci.com/settings/project/github/you/test-repo/ssh){:rel="nofollow"},
 and add the key you created in step 1.
 In the "Hostname" field,
 enter "github.com",
